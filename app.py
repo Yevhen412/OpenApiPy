@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from loguru import logger
 
 # SDK от Spotware (Python)
-from ctrader_open_api import Client, Endpoints, Protobuf
+from openapipy import Client, Endpoints, Protobuf
 from ctrader_open_api.protobuf import spotware_pb2 as pb
 
 app = FastAPI(title="ICM Quotes (cTrader Open API)")
