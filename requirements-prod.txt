@@ -3,4 +3,5 @@ uvicorn==0.30.6
 loguru==0.7.2
 protobuf==3.20.1
 twisted==24.3.0
-git+https://github.com/Yevhen412/OpenApiPy.git@main#egg=ctrader-open-api
+--prefer-binary
+git+https://github.com/Yevhen412/OpenApiPy.git@main
