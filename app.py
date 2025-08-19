@@ -13,6 +13,7 @@ except ModuleNotFoundError:
 # --------------------------------------------------------------------
 
 app = FastAPI(title="ICM Quotes via cTrader Open API (DEMO)")
+# изменение
 
 CLIENT_ID = os.getenv("CTRADER_CLIENT_ID", "")
 CLIENT_SECRET = os.getenv("CTRADER_CLIENT_SECRET", "")
