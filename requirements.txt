@@ -1,5 +1,6 @@
-fastapi
-uvicorn
-loguru
-openapipy
-twisted
+fastapi==0.115.5
+uvicorn==0.30.6
+loguru==0.7.2
+ctrader-open-api==0.0.20
+twisted==23.10.0
+protobuf==4.25.3
