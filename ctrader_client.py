@@ -3,35 +3,36 @@
 import asyncio
 import websockets
 import json
+import os
 
-TOKEN = "ВСТАВЬ_СЮДА_ACCESS_TOKEN"
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+ACCOUNT_ID = os.getenv("CTRADER_ACCOUNT_ID")  # ← тоже вынесем в переменные
 
 async def connect():
     uri = "wss://openapi.ctrader.com:5035"
 
     async with websockets.connect(uri) as websocket:
-        # Отправка команды инициализации
+        # Авторизация
         await websocket.send(json.dumps({
             "payloadType": "authorizeReq",
             "payload": {
-                "accessToken": TOKEN
+                "accessToken": ACCESS_TOKEN
             }
         }))
 
-        # Подписка на котировки по EURUSD
+        # Подписка на EURUSD (symbolId = 1)
         await websocket.send(json.dumps({
             "payloadType": "subscribeForSpotsReq",
             "payload": {
-                "cTraderAccountId": 1234567,  # ← заменишь на свой ID
-                "symbolId": 1  # EURUSD
+                "cTraderAccountId": int(ACCOUNT_ID),
+                "symbolId": 1
             }
         }))
 
-        # Слушаем ответы
+        # Слушаем входящие данные
         while True:
             response = await websocket.recv()
             print(response)
 
-# Запуск
 if __name__ == "__main__":
     asyncio.run(connect())
