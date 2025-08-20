@@ -1,16 +1,18 @@
 import sys
 import os
-import asyncio 
+import asyncio
+import logging
+
 sys.path.append(os.path.join(os.path.dirname(__file__), 'libs'))
 
-from ctrader_open_api.openapi_client import Client
+from ctrader_open_api.openapi_client import Client, Endpoints
 from fastapi import FastAPI
 
-app = FastAPI()
+# Настройка логгера
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-@app.get("/")
-def read_root():
-    return {"status": "OK"}
+app = FastAPI()
 
 CLIENT_ID = os.getenv("CTRADER_CLIENT_ID", "")
 CLIENT_SECRET = os.getenv("CTRADER_CLIENT_SECRET", "")
