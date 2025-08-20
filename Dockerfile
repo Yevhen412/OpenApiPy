@@ -1,14 +1,15 @@
+# Используем официальный образ Python
 FROM python:3.11-slim
 
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# УСТАНАВЛИВАЕМ git
-RUN apt-get update && apt-get install -y git
-
-COPY requirements-prod.txt requirements.txt
-RUN python -m pip install --upgrade pip \
- && pip install --no-cache-dir -r requirements.txt
-
+# Копируем файлы проекта в контейнер
 COPY . .
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+# Устанавливаем зависимости
+RUN pip install --upgrade pip \
+ && pip install -r requirements.txt
+
+# Указываем команду запуска приложения
+CMD ["python", "app.py"]
