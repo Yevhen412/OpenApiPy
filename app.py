@@ -3,8 +3,13 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), 'libs'))
 
 from ctrader_open_api.openapi_client import Client
+from fastapi import FastAPI
 
 app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"status": "OK"}
 
 CLIENT_ID = os.getenv("CTRADER_CLIENT_ID", "")
 CLIENT_SECRET = os.getenv("CTRADER_CLIENT_SECRET", "")
