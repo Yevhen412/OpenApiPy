@@ -1,5 +1,6 @@
 import sys
 import os
+import asyncio 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'libs'))
 
 from ctrader_open_api.openapi_client import Client
