@@ -1,5 +1,12 @@
-# endpoints.py
+# libs/ctrader_open_api/endpoints.py
+
 class Endpoints:
-    def __init__(self):
-        self.hostname = "demo.ctraderapi.com"
-        self.port = 5035
+    DEMO = {
+        "host": "demo.ctraderapi.com",
+        "port": 5035
+    }
+
+    LIVE = {
+        "host": "live.ctraderapi.com",
+        "port": 5035
+    }
