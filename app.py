@@ -1,12 +1,8 @@
+import sys
 import os
-import asyncio
-from fastapi import FastAPI, Request
-from loguru import logger
+sys.path.append(os.path.join(os.path.dirname(__file__), 'libs'))
 
-# Импортируем локальную библиотеку
-from libs.ctrader_open_api.openapi_client import Client
-from libs.ctrader_open_api import Endpoints
-from libs.ctrader_open_api import protobuf as pb_module  # если есть
+from ctrader_open_api.openapi_client import Client
 
 app = FastAPI()
 
