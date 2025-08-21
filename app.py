@@ -1,20 +1,12 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import PlainTextResponse, JSONResponse
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
-@app.get("/health")
-def health():
-    return {"ok": True}
-
-@app.get("/")
-def root():
-    return {"ok": True, "hint": "use /oauth/callback?code=123 to test"}
-
-@app.get("/oauth/callback")
-def oauth_callback(request: Request):
-    code = request.query_params.get("code")
-    if not code:
-        return PlainTextResponse("Missing ?code=...", status_code=400)
-    # Показываем ровно то, что пришло
-    return PlainTextResponse(f"Authorization code: {code}", status_code=200)
+@app.get("/oauth/callback", response_class=HTMLResponse)
+async def callback(request: Request, code: str = None, error: str = None):
+    if error:
+        return f"<h2>OAuth error: {error}</h2>"
+    if code:
+        return f"<h2>Authorization code: {code}</h2>"
+    return "<h2>No code received</h2>"
