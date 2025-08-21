@@ -1,12 +1,18 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import PlainTextResponse
 
 app = FastAPI()
 
-@app.get("/oauth/callback", response_class=HTMLResponse)
-async def callback(request: Request, code: str = None, error: str = None):
+@app.get("/health")
+def health():
+    return {"ok": True}
+
+@app.get("/oauth/callback", response_class=PlainTextResponse)
+async def oauth_callback(request: Request):
+    code = request.query_params.get("code")
+    error = request.query_params.get("error")
     if error:
-        return f"<h2>OAuth error: {error}</h2>"
+        return f"OAuth error: {error}"
     if code:
-        return f"<h2>Authorization code: {code}</h2>"
-    return "<h2>No code received</h2>"
+        return f"Authorization code: {code}"
+    return "No code received"
